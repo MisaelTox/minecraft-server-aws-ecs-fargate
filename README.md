@@ -28,7 +28,7 @@ This project deploys a fully functional Minecraft: Java Edition server on AWS us
 
 The server status is verified using external monitoring tools to confirm the infrastructure is reachable and the container service is healthy:
 
-![Minecraft Server Status](URL_DE_TU_IMAGEN_AQUI)
+![Minecraft Server Status](./img/serverdemo.png)
 
 ## 📖 How to Deploy
 
@@ -39,7 +39,7 @@ The server status is verified using external monitoring tools to confirm the inf
 ## 🧹 Cleanup
 
 To avoid AWS costs when not in use:
-```bash
+
 terraform destroy
 
 
