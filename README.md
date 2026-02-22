@@ -1,3 +1,60 @@
+# AWS Cloud Minecraft Server (Serverless & Persistent)
+
+This project deploys a fully functional Minecraft: Java Edition server on AWS using a serverless architecture with **Terraform**. It is designed to be cost-effective, scalable, and persistent.
+
+## 🏗️ Architecture Overview
+
+- **Compute**: AWS Fargate (ECS) - Serverless container execution.
+- **Storage**: AWS EFS (Elastic File System) - Persistent storage for world data and configurations.
+- **Networking**: Custom VPC with Public Subnets and specialized Security Groups.
+- **Infrastructure as Code**: Terraform (Modular structure).
+- **Monitoring**: AWS CloudWatch Logs for real-time server debugging.
+
+## 🚀 Key Features
+
+- **Persistence**: Game data survives container restarts thanks to EFS.
+- **Security**: Granular Security Group rules (only port 25565 is exposed).
+- **Cost-Optimized**: Uses Fargate's smallest 1vCPU/2GB RAM profile (eligible for AWS Free Tier).
+- **Automation**: Fully automated deployment with a single command.
+
+## 🛠️ Tech Stack
+
+* **Terraform** (IaC)
+* **Docker** (Minecraft Server Image)
+* **AWS CLI**
+* **Linux/Bash**
+
+## 📸 Deployment Proof
+
+The server status is verified using external monitoring tools to confirm the infrastructure is reachable and the container service is healthy:
+
+![Minecraft Server Status](URL_DE_TU_IMAGEN_AQUI)
+
+## 📖 How to Deploy
+
+1. Initialize Terraform: `terraform init`
+2. Review the plan: `terraform plan`
+3. Deploy: `terraform apply -auto-approve`
+
+## 🧹 Cleanup
+
+To avoid AWS costs when not in use:
+```bash
+terraform destroy
+
+
+📜 License & Credits
+This project is a modified fork of the original work by Antoine CICHOWICZ.
+The code is licensed under the Apache License 2.0.
+
+Developed as part of my Junior Cloud Engineer Portfolio.
+
+
+
+
+
+
+
 # Minecraft Server on AWS ECS Fargate using Terraform
 
 <p align="center">
