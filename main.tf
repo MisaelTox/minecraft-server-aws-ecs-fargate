@@ -4,12 +4,12 @@ provider "aws" {
 
 # --- REDES ---
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
-  name   = "minecraft_vpc"
-  cidr   = "10.0.0.0/16"
-  azs    = ["${var.region}a", "${var.region}b", "${var.region}c"]
+  source         = "terraform-aws-modules/vpc/aws"
+  name           = "minecraft_vpc"
+  cidr           = "10.0.0.0/16"
+  azs            = ["${var.region}a", "${var.region}b", "${var.region}c"]
   public_subnets = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
-  
+
   enable_nat_gateway = false
   enable_vpn_gateway = false
 }
@@ -32,7 +32,7 @@ resource "aws_efs_mount_target" "minecraft_mount" {
 resource "aws_security_group" "minecraft_server" {
   name   = "minecraft_sg"
   vpc_id = module.vpc.vpc_id
- 
+
   ingress {
     from_port   = 25565
     to_port     = 25565
@@ -46,7 +46,7 @@ resource "aws_security_group" "minecraft_server" {
     protocol  = "tcp"
     self      = true
   }
- 
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -70,8 +70,8 @@ resource "aws_ecs_task_definition" "minecraft_server" {
   task_role_arn            = aws_iam_role.ecs_tasks_execution_role.arn
 
   container_definitions = jsonencode([{
-    name  = "minecraft-server"
-    image = "itzg/minecraft-server"
+    name         = "minecraft-server"
+    image        = "itzg/minecraft-server"
     portMappings = [{ containerPort = 25565, hostPort = 25565, protocol = "tcp" }]
     environment = [
       { name = "EULA", value = "TRUE" },
@@ -120,7 +120,7 @@ resource "aws_cloudwatch_log_group" "minecraft_log_group" {
 }
 
 resource "aws_iam_role" "ecs_tasks_execution_role" {
-  name               = "minecraft_ecs_role"
+  name = "minecraft_ecs_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
