@@ -1,4 +1,4 @@
-# AWS Serverless Minecraft Infrastructure
+# AWS Serverless Minecraft Infrastructure ![Terraform CI/CD](https://github.com/MisaelTox/minecraft-server-aws-ecs-fargate/actions/workflows/terraform.yml/badge.svg)
 
 This project deploys a high-performance **Minecraft: Java Edition** server on **AWS Fargate** using **Terraform**. It features a fully serverless architecture with persistent world storage via **Amazon EFS**.
 
