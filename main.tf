@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-# --- REDES ---
+# --- Networking ---
 module "vpc" {
   source         = "terraform-aws-modules/vpc/aws"
   name           = "minecraft_vpc"
@@ -14,7 +14,7 @@ module "vpc" {
   enable_vpn_gateway = false
 }
 
-# --- ALMACENAMIENTO (EFS) ---
+# --- Storage (EFS) ---
 resource "aws_efs_file_system" "minecraft_data" {
   creation_token = "minecraft-data"
   encrypted      = true
@@ -28,7 +28,7 @@ resource "aws_efs_mount_target" "minecraft_mount" {
   security_groups = [aws_security_group.minecraft_server.id]
 }
 
-# --- SEGURIDAD ---
+# --- Security ---
 resource "aws_security_group" "minecraft_server" {
   name   = "minecraft_sg"
   vpc_id = module.vpc.vpc_id
@@ -55,7 +55,7 @@ resource "aws_security_group" "minecraft_server" {
   }
 }
 
-# --- COMPUTO (ECS) ---
+# --- Compute (ECS Fargate) ---
 resource "aws_ecs_cluster" "minecraft_server" {
   name = "minecraft_cluster"
 }
@@ -110,10 +110,11 @@ resource "aws_ecs_service" "minecraft_server" {
     security_groups  = [aws_security_group.minecraft_server.id]
     assign_public_ip = true
   }
+
   depends_on = [aws_efs_mount_target.minecraft_mount]
 }
 
-# --- LOGS Y ROLES ---
+# --- Logs and IAM Roles ---
 resource "aws_cloudwatch_log_group" "minecraft_log_group" {
   name              = "/ecs/minecraft-server"
   retention_in_days = 7
