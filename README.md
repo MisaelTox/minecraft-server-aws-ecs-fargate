@@ -10,6 +10,8 @@ This project deploys a **Minecraft: Java Edition** server on **AWS ECS Fargate**
 
 ## 🏗️ Architecture
 
+![AWS Architecture Diagram](./img/minecraft-arc.drawio.png)
+
 | Component | Technology |
 |-----------|-----------|
 | Compute | AWS ECS Fargate (1vCPU / 2GB RAM) |
